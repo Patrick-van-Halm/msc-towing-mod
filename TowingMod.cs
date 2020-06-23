@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using HutongGames.PlayMaker;
-using HutongGames.PlayMaker.Actions;
-using System.Collections;
 
 namespace TowingMod
 {
@@ -13,8 +11,8 @@ namespace TowingMod
     {
         public override string ID => "TowingMod"; //Your mod ID (unique)
         public override string Name => "Towing Mod"; //You mod name
-        public override string Author => "Polyoxis"; //Your Username
-        public override string Version => "1.0"; //Version
+        public override string Author => "AlwayzPatrick"; //Your Username
+        public override string Version => "1.2"; //Version
 
         // Set this to true if you will be load custom assets from Assets folder.
         // This will create subfolder in Assets folder for your mod.
@@ -28,8 +26,6 @@ namespace TowingMod
         private string lastPlayerLocation = "";
         private GameObject player;
         private Camera playerCam;
-        private GameObject sleepEyes;
-        private Animation eyesAnimation;
         private GameObject towedVehicle;
 
         private string[] blacklistedCars = new string[]
@@ -58,7 +54,7 @@ namespace TowingMod
                 GUIStyle style = new GUIStyle();
                 style.normal.textColor = Color.white;
                 style.alignment = TextAnchor.MiddleCenter;
-                GUI.Label(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 40, 300, 20), $"Currently towing: {towedVehicle.name.Substring(0, towedVehicle.name.IndexOf('('))} [{towingAcceptKey.Key.ToString()} TO ACCEPT PLACEMENT]", style);
+                GUI.Label(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 40, 300, 20), $"Currently towing: {towedVehicle.name.Substring(0, towedVehicle.name.IndexOf('('))} [{towingAcceptKey.Key} TO ACCEPT PLACEMENT]", style);
             }
 
             if (toggleTowingMenu)
@@ -178,8 +174,6 @@ namespace TowingMod
 
             player = GameObject.Find("PLAYER");
             playerCam = player.transform.Find("Pivot/AnimPivot/Camera/FPSCamera/FPSCamera").gameObject.GetComponent<Camera>();
-            sleepEyes = GameObject.Find("PLAYER/Pivot/AnimPivot/Camera/FPSCamera/FPSCamera/SleepEyes");
-            eyesAnimation = this.sleepEyes.GetComponent<Animation>();
             TowVehicle += TowingMod_TowVehicle;
             isLoaded = true;
         }
